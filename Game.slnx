@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Game.Api/Game.Api.csproj" />
+    <Project Path="src/Game.Client/Game.Client.csproj" />
+    <Project Path="src/Game.Shared/Game.Shared.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Game.Domain.Tests/Game.Domain.Tests.csproj" />
+  </Folder>
+</Solution>
