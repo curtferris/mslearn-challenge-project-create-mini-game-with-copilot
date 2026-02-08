@@ -1,0 +1,114 @@
+@using Game.Shared.Models
+
+<div class="panel">
+    <header>
+        <h2>Stats & History</h2>
+        <p class="panel-subtitle">Track streaks, coin flow, and how each opponent treats you.</p>
+    </header>
+
+    @if (Stats == null)
+    {
+        <p class="muted">Stats will appear once you start playing.</p>
+    }
+    else
+    {
+        <div class="stat-grid">
+            <div>
+                <span class="label">Coins</span>
+                <strong>@Stats.Player.Coins</strong>
+            </div>
+            <div>
+                <span class="label">Record</span>
+                <strong>@Stats.Player.Wins - @Stats.Player.Losses - @Stats.Player.Ties</strong>
+            </div>
+            <div>
+                <span class="label">Current streak</span>
+                <strong>@FormatStreak(Stats.Player.CurrentStreak)</strong>
+            </div>
+            <div>
+                <span class="label">Best streak</span>
+                <strong>@Stats.Player.BestStreak</strong>
+            </div>
+        </div>
+
+        <h3>Per Opponent</h3>
+        <div class="table-scroll">
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Opponent</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                        <th>Ties</th>
+                        <th>Net Coins</th>
+                        <th>Last Played</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Stats.Player.OpponentStats.Count == 0)
+                    {
+                        <tr><td colspan="6" class="muted">No encounters recorded yet.</td></tr>
+                    }
+                    else
+                    {
+                        @foreach (var entry in Stats.Player.OpponentStats.OrderByDescending(e => e.Value.LastPlayed ?? DateTimeOffset.MinValue))
+                        {
+                            <tr>
+                                <td>@entry.Key</td>
+                                <td>@entry.Value.Wins</td>
+                                <td>@entry.Value.Losses</td>
+                                <td>@entry.Value.Ties</td>
+                                <td class="@(entry.Value.NetCoins >= 0 ? "positive" : "negative")">
+                                    @(entry.Value.NetCoins >= 0 ? "+" : string.Empty)@entry.Value.NetCoins
+                                </td>
+                                <td>@(entry.Value.LastPlayed?.ToLocalTime().ToString("g") ?? "—")</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Recent Rounds</h3>
+        <ol class="history-list">
+            @if (Stats.RecentRounds == null || Stats.RecentRounds.Count == 0)
+            {
+                <li class="muted">No history yet.</li>
+            }
+            else
+            {
+                @foreach (var round in Stats.RecentRounds.Reverse())
+                {
+                    <li>
+                        <span class="timestamp">@round.Timestamp.ToLocalTime():t</span>
+                        <span>@round.OpponentId</span>
+                        <span>@round.PlayerMove</span>
+                        <span class="@(round.CoinDelta >= 0 ? "positive" : "negative")">
+                            @(round.CoinDelta >= 0 ? "+" : string.Empty)@round.CoinDelta
+                        </span>
+                    </li>
+                }
+            }
+        </ol>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public PlayerStatsResponse? Stats { get; set; }
+
+    private static string FormatStreak(int streak)
+    {
+        if (streak > 0)
+        {
+            return $"W{streak}";
+        }
+
+        if (streak < 0)
+        {
+            return $"L{Math.Abs(streak)}";
+        }
+
+        return "Neutral";
+    }
+}

@@ -1,0 +1,64 @@
+@using Game.Shared.Models
+
+<div class="panel">
+    <header>
+        <h2>Latest Clash</h2>
+        <p class="panel-subtitle">Replays the most recent round result.</p>
+    </header>
+
+    @if (LastRound == null)
+    {
+        <p class="muted">Play a round to see the action recap.</p>
+    }
+    else
+    {
+        <div class="result-card">
+            <div class="result-card__row">
+                <span>You played</span>
+                <strong>@FormatMove(LastRound.PlayerMove)</strong>
+            </div>
+            <div class="result-card__row">
+                <span>Opponent played</span>
+                <strong>@FormatMove(LastRound.OpponentMove)</strong>
+            </div>
+            <div class="result-card__row result-card__winner @WinnerClass">
+                <span>Outcome</span>
+                <strong>@WinnerText</strong>
+            </div>
+            <div class="result-card__row">
+                <span>Coin delta</span>
+                <strong class="@(LastRound.CoinDelta >= 0 ? "positive" : "negative")">
+                    @(LastRound.CoinDelta >= 0 ? "+" : string.Empty)@LastRound.CoinDelta
+                </strong>
+            </div>
+            <small>@LastRound.Timestamp.ToLocalTime():g</small>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public RoundResult? LastRound { get; set; }
+
+    private string WinnerText => LastRound?.Winner switch
+    {
+        RoundWinner.Player => "Victory!",
+        RoundWinner.Opponent => "Defeat",
+        _ => "Tie"
+    } ?? string.Empty;
+
+    private string WinnerClass => LastRound?.Winner switch
+    {
+        RoundWinner.Player => "winner-player",
+        RoundWinner.Opponent => "winner-opponent",
+        _ => "winner-tie"
+    } ?? string.Empty;
+
+    private static string FormatMove(MoveType move) => move switch
+    {
+        MoveType.Rock => "Rock ✊",
+        MoveType.Paper => "Paper ✋",
+        MoveType.Scissors => "Scissors ✌️",
+        _ => move.ToString()
+    };
+}

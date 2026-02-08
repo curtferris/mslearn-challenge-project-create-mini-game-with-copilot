@@ -1,0 +1,45 @@
+@using Game.Shared.Models
+
+<div class="panel">
+    <header>
+        <h2>Pick Your Move</h2>
+        <p class="panel-subtitle">Rock. Paper. Scissors. Classic—yet deadly.</p>
+    </header>
+
+    <div class="move-selector">
+        @foreach (var move in Enum.GetValues<MoveType>())
+        {
+            var isSelected = move == SelectedMove;
+            <button type="button"
+                    class="move-chip @(isSelected ? "selected" : string.Empty)"
+                    @onclick="() => OnMoveChosen(move)">
+                @GetEmoji(move)
+                <span>@move</span>
+            </button>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public MoveType SelectedMove { get; set; }
+
+    [Parameter]
+    public EventCallback<MoveType> SelectedMoveChanged { get; set; }
+
+    private async Task OnMoveChosen(MoveType move)
+    {
+        if (SelectedMoveChanged.HasDelegate)
+        {
+            await SelectedMoveChanged.InvokeAsync(move);
+        }
+    }
+
+    private static string GetEmoji(MoveType move) => move switch
+    {
+        MoveType.Rock => "✊",
+        MoveType.Paper => "✋",
+        MoveType.Scissors => "✌️",
+        _ => "❓"
+    };
+}

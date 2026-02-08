@@ -1,0 +1,63 @@
+<div class="panel">
+    <header>
+        <h2>Bet Your Coins</h2>
+        <p class="panel-subtitle">Current balance: <strong>@Coins</strong> coins</p>
+    </header>
+
+    <div class="bet-form">
+        <label for="bet-input">Wager</label>
+         <input id="bet-input"
+             type="number"
+             min="1"
+             max="@Math.Max(1, Coins)"
+             value="@BetAmount"
+             @oninput="e => OnBetInput(e.Value?.ToString())"
+             @onblur="_ => ClampBet()"
+             disabled="@(Coins <= 0)" />
+
+        <div class="chip-tray">
+            @foreach (var chip in QuickChips)
+            {
+                <button type="button"
+                        class="chip"
+                        disabled="@((Coins <= 0) || chip > Coins)"
+                        @onclick="() => SetBet(chip)">
+                    +@chip
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private static readonly int[] QuickChips = { 5, 10, 15, 20 };
+
+    [Parameter]
+    public int BetAmount { get; set; } = 5;
+
+    [Parameter]
+    public EventCallback<int> BetAmountChanged { get; set; }
+
+    [Parameter]
+    public int Coins { get; set; }
+
+    private Task SetBet(int amount) => UpdateBet(amount);
+
+    private Task OnBetInput(string? value)
+    {
+        if (int.TryParse(value, out var parsed))
+        {
+            return UpdateBet(parsed);
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private Task UpdateBet(int amount)
+    {
+        var next = Math.Clamp(amount, 1, Math.Max(1, Coins));
+        return BetAmountChanged.InvokeAsync(next);
+    }
+
+    private Task ClampBet() => UpdateBet(BetAmount);
+}

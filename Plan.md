@@ -50,16 +50,20 @@ Modern take on Alex Kidd’s Janken battles, focused on personality-driven oppon
 - [x] Add xUnit tests (e.g., `tests/Game.Domain.Tests`) validating resolver outcomes, bet validation edge cases, and deterministic AI behaviors using seeded RNG.
 
 ### Phase 3 – Blazor UI & Interaction Flow
-- [ ] Scaffold shared HTTP client/service layer for calling `/opponents`, `/play`, `/stats`, `/reset`, reusing shared DTOs.
-- [ ] Build components: opponent picker, move selector, bet form (with validation + quick chips), results panel with retro effects, stats dashboard.
-- [ ] Wire interaction flow (select opponent → place bet → pick move → show result) with loading feedback and error states; sync UI state to API responses.
-- [ ] Optionally add local-storage hook for session persistence if the gameplay loop benefits from resume support.
+- [x] Scaffold shared HTTP client/service layer for calling `/opponents`, `/play`, `/stats`, `/reset`, reusing shared DTOs.
+- [x] Build components: opponent picker, move selector, bet form (with validation + quick chips), results panel with retro effects, stats dashboard.
+- [x] Wire interaction flow (select opponent → place bet → pick move → show result) with loading feedback and error states; sync UI state to API responses.
+- [x] Optionally add local-storage hook for session persistence if the gameplay loop benefits from resume support.
+
+> Update: Added the gameplay hub (`Pages/Index.razor`) wired to `GameApiClient`, plus a bespoke retro-inspired theme and a local-storage backed session cache so the UI components share a cohesive layout and survive refreshes.
 
 ### Phase 4 – Polish, QA, and Enhancements
-- [ ] Layer retro-inspired animations/audio/CRT shaders and contextual taunts driven by streak data.
+- [x] Layer retro-inspired animations/audio/CRT shaders and contextual taunts driven by streak data.
 - [ ] Implement optional mechanics (min/max bet toggles, streak bonuses, unlockable opponents/themes) guarded behind feature flags or config.
 - [ ] Expand automated test coverage (API integration tests, Blazor component tests) and document run commands in README.
 - [ ] Prepare release notes or Solution-branch summary so reviewers can compare against the empty baseline.
+
+> Update: Added a CRT scanline overlay, glitchy sweeps, and a streak-aware taunt marquee fed by live player stats to kick off Phase 4 polish.
 
 ## Reference Briefs
 

@@ -1,0 +1,52 @@
+@using Game.Shared.Models
+
+<div class="panel">
+    <header>
+        <h2>Choose Your Challenger</h2>
+        <p class="panel-subtitle">Each personality plays differently—pick wisely.</p>
+    </header>
+
+    @if (Opponents == null || Opponents.Count == 0)
+    {
+        <p class="muted">No opponents are available yet.</p>
+    }
+    else
+    {
+        <div class="opponent-grid">
+            @foreach (var opponent in Opponents)
+            {
+                var isSelected = opponent.Id == SelectedOpponentId;
+                <button type="button"
+                        class="opponent-card @(isSelected ? "selected" : string.Empty)"
+                        @onclick="() => OnSelectOpponent(opponent.Id)"
+                        aria-pressed="@isSelected">
+                    <div class="opponent-card__name">@opponent.Name</div>
+                    <div class="opponent-card__meta">
+                        <span>@opponent.BehaviorType</span>
+                        <span class="difficulty difficulty-@opponent.Difficulty.ToLowerInvariant()">@opponent.Difficulty</span>
+                    </div>
+                    <p>@opponent.Description</p>
+                </button>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public IReadOnlyList<OpponentProfile> Opponents { get; set; } = Array.Empty<OpponentProfile>();
+
+    [Parameter]
+    public string? SelectedOpponentId { get; set; }
+
+    [Parameter]
+    public EventCallback<string> SelectedOpponentIdChanged { get; set; }
+
+    private async Task OnSelectOpponent(string opponentId)
+    {
+        if (SelectedOpponentIdChanged.HasDelegate)
+        {
+            await SelectedOpponentIdChanged.InvokeAsync(opponentId);
+        }
+    }
+}

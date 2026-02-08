@@ -20,7 +20,13 @@ Planning workspace for the Microsoft Learn challenge project. The `main` branch 
 
 ## Local Development
 
-From the repo root run the API and client separately:
+From the repo root you can spin up both apps with a single command (logs are prefixed per service):
+
+```bash
+pwsh scripts/run-dev.ps1
+```
+
+If you prefer manual control, run the API and client separately:
 
 ```bash
 # Terminal 1 – API
@@ -29,6 +35,8 @@ dotnet watch --project src/Game.Api/Game.Api.csproj
 # Terminal 2 – Blazor WASM client
 dotnet watch --project src/Game.Client/Game.Client.csproj
 ```
+
+VS Code users can also pick the "Launch API + Client" compound configuration provided in `.vscode/launch.json` to debug both processes at once.
 
 Both apps target http://localhost-based ports selected by the ASP.NET dev cert tooling. Update `appsettings.Development.json` / client `appsettings` once we wire the actual endpoints.
 

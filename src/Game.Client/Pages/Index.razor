@@ -1,0 +1,85 @@
+@page "/"
+
+<PageTitle>Alex Kidd Clash</PageTitle>
+
+<div class="arena-shell">
+    <section class="hero-panel panel">
+        <div>
+            <p class="eyebrow">Alex Kidd Training Grounds</p>
+            <h1>Face the Janken Syndicate</h1>
+            <p class="panel-subtitle">
+                Pick a rival, stake your coins, reveal your move. The API keeps the authoritative state; you focus on the mind games.
+            </p>
+        </div>
+        <div class="hero-metrics">
+            <div class="hero-pill">
+                <span class="label">Coins</span>
+                <strong>@CurrentCoins</strong>
+            </div>
+            <div class="hero-pill">
+                <span class="label">Record</span>
+                <strong>@OverallRecord</strong>
+            </div>
+            <div class="hero-pill">
+                <span class="label">Streak</span>
+                <strong>@CurrentStreakLabel</strong>
+            </div>
+            <div class="hero-pill">
+                <span class="label">Opponents</span>
+                <strong>@AvailableOpponentsCount</strong>
+            </div>
+        </div>
+    </section>
+
+    <TauntMarquee Message="@tauntMessage" Tone="@tauntTone" />
+
+    @if (isInitializing)
+    {
+        <div class="loading-state">
+            <span>Spinning up the arena...</span>
+        </div>
+    }
+    else
+    {
+        if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            <div class="alert" role="status">
+                @errorMessage
+            </div>
+        }
+
+        <div class="layout-grid">
+            <div class="column column--left">
+                <OpponentPicker Opponents="AvailableOpponents"
+                                @bind-SelectedOpponentId="selectedOpponentId" />
+
+                <MoveSelector @bind-SelectedMove="selectedMove" />
+
+                <BetForm Coins="@CurrentCoins"
+                         @bind-BetAmount="betAmount" />
+
+                <div class="action-row">
+                    <button class="btn primary"
+                            @onclick="HandlePlayAsync"
+                            disabled="@(!CanPlayRound)">
+                        @(isBusy ? "Resolving..." : "Play Round")
+                    </button>
+                    <button class="btn secondary"
+                            @onclick="HandleResetAsync"
+                            disabled="@IsResetDisabled">
+                        @(isResetting ? "Resetting..." : "Reset Run")
+                    </button>
+                </div>
+
+                <p class="helper-text">
+                    Flow: lock an opponent, set a wager, tap a move, then smash Play.
+                </p>
+            </div>
+
+            <div class="column column--right">
+                <ResultsPanel LastRound="lastRound" />
+                <StatsDashboard Stats="stats" />
+            </div>
+        </div>
+    }
+</div>

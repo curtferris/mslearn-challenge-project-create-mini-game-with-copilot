@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build Game.Api",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "src/Game.Api/Game.Api.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build Game.Client",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "src/Game.Client/Game.Client.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

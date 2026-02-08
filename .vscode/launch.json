@@ -1,0 +1,46 @@
+{
+    "$schema": "https://aka.ms/azuretoolsconfig/schema/launch.v2",
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Game.Api",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/Game.Api/bin/Debug/net10.0/Game.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Game.Api",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "dotnetRunMessages": true,
+            "preLaunchTask": "build Game.Api",
+            "launchBrowser": {
+                "enabled": false
+            }
+        },
+        {
+            "name": "Game.Client",
+            "type": "blazorwasm",
+            "request": "launch",
+            "project": "${workspaceFolder}/src/Game.Client/Game.Client.csproj",
+            "cwd": "${workspaceFolder}/src/Game.Client",
+            "browser": "edge",
+            "trace": false,
+            "launchBrowser": {
+                "enabled": true,
+                "args": "${auto-detect-url}"
+            },
+            "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch API + Client",
+            "configurations": [
+                "Game.Api",
+                "Game.Client"
+            ]
+        }
+    ]
+}

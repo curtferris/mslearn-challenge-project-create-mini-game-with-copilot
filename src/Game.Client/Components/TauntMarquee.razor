@@ -1,0 +1,25 @@
+<div class="taunt-marquee">
+    <div class="taunt-marquee__label">AI Broadcast</div>
+    <p class="taunt-marquee__message @ToneClass">
+        @DisplayMessage
+    </p>
+</div>
+
+@code {
+    [Parameter]
+    public string? Message { get; set; }
+
+    [Parameter]
+    public string Tone { get; set; } = "neutral";
+
+    private string DisplayMessage => string.IsNullOrWhiteSpace(Message)
+        ? "Boot sequence ready. Pick a rival to start the mind games."
+        : Message!;
+
+    private string ToneClass => Tone switch
+    {
+        "hype" => "taunt-hype",
+        "danger" => "taunt-danger",
+        _ => "taunt-neutral"
+    };
+}
