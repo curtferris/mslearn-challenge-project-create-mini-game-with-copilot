@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Lucky Lena portrait">
+  <defs>
+    <linearGradient id="lena-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1b1f45" />
+      <stop offset="100%" stop-color="#060911" />
+    </linearGradient>
+    <linearGradient id="lena-hair" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fcd9ff" />
+      <stop offset="100%" stop-color="#d4a9ff" />
+    </linearGradient>
+    <linearGradient id="lena-coat" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2a0f3a" />
+      <stop offset="100%" stop-color="#531547" />
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="26" fill="url(#lena-bg)" />
+  <circle cx="80" cy="70" r="50" fill="#150f22" opacity="0.8" />
+  <path d="M28 130 Q80 150 132 130 L140 160 H20 Z" fill="#010205" />
+  <ellipse cx="80" cy="82" rx="34" ry="42" fill="#fddbd4" />
+  <path d="M35 86 Q80 10 125 86" fill="url(#lena-hair)" />
+  <path d="M38 86 Q74 58 80 58 Q86 58 122 86" stroke="#ffefff" stroke-width="4" opacity="0.5" fill="none" />
+  <circle cx="60" cy="88" r="6" fill="#1f1d3a" />
+  <circle cx="100" cy="88" r="6" fill="#1f1d3a" />
+  <circle cx="60" cy="86.5" r="2.2" fill="#fff" />
+  <circle cx="100" cy="86.5" r="2.2" fill="#fff" />
+  <path d="M52 102 Q80 112 108 102" stroke="#f6828c" stroke-width="4" stroke-linecap="round" fill="none" />
+  <path d="M70 114 Q80 120 90 114" stroke="#64254f" stroke-width="6" stroke-linecap="round" fill="none" />
+  <rect x="35" y="116" width="90" height="38" rx="18" fill="url(#lena-coat)" />
+  <path d="M35 130 C55 122 105 122 125 130" stroke="#fcd9ff" stroke-width="3" opacity="0.4" />
+  <circle cx="45" cy="132" r="8" fill="#ffd95e" />
+  <circle cx="115" cy="132" r="8" fill="#ffd95e" />
+  <path d="M52 116 V154" stroke="#ffb1d8" stroke-width="5" opacity="0.5" />
+  <path d="M108 116 V154" stroke="#ffb1d8" stroke-width="5" opacity="0.5" />
+  <path d="M40 70 H120" stroke="#fdf5ff" stroke-width="2" stroke-dasharray="6 6" opacity="0.35" />
+</svg>

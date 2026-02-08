@@ -20,6 +20,20 @@
                         class="opponent-card @(isSelected ? "selected" : string.Empty)"
                         @onclick="() => OnSelectOpponent(opponent.Id)"
                         aria-pressed="@isSelected">
+                    <div class="opponent-card__portrait">
+                        @if (!string.IsNullOrWhiteSpace(opponent.PortraitUrl))
+                        {
+                            <img src="@opponent.PortraitUrl"
+                                 alt="@($"{opponent.Name} portrait")"
+                                 loading="lazy" />
+                        }
+                        else
+                        {
+                            <div class="opponent-card__placeholder">
+                                <span>@opponent.Name[0]</span>
+                            </div>
+                        }
+                    </div>
                     <div class="opponent-card__name">@opponent.Name</div>
                     <div class="opponent-card__meta">
                         <span>@opponent.BehaviorType</span>

@@ -22,7 +22,8 @@ public sealed class WeightedStrategy : IOpponentStrategy
         Name = "Lucky Lena",
         BehaviorType = "Weighted",
         Difficulty = "Medium",
-        Description = "Prefers Paper but occasionally mixes things up."
+        Description = "Prefers Paper but occasionally mixes things up.",
+        PortraitUrl = "/images/opponents/lena.svg"
     };
 
     public MoveType GetNextMove(PlayRequest request, PlayerState playerState)

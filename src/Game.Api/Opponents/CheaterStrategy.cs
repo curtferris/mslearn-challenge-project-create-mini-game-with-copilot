@@ -20,7 +20,8 @@ public sealed class CheaterStrategy : IOpponentStrategy
         Name = "Sneaky Sid",
         BehaviorType = "Cheater",
         Difficulty = "Hard",
-        Description = "Peeks at your move ~65% of the time and counters it."
+        Description = "Peeks at your move ~65% of the time and counters it.",
+        PortraitUrl = "/images/opponents/sid.svg"
     };
 
     public MoveType GetNextMove(PlayRequest request, PlayerState playerState)

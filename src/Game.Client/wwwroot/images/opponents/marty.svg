@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Marty the Maverick portrait">
+  <defs>
+    <linearGradient id="marty-sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d2c4d" />
+      <stop offset="100%" stop-color="#0b1326" />
+    </linearGradient>
+    <linearGradient id="marty-shirt" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a83f1f" />
+      <stop offset="100%" stop-color="#c8622f" />
+    </linearGradient>
+    <linearGradient id="marty-flannel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f6a55b" />
+      <stop offset="100%" stop-color="#d05a2a" />
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="28" fill="url(#marty-sky)" />
+  <path d="M10 130 Q80 150 150 130 L150 160 L10 160 Z" fill="#060b16" opacity="0.6" />
+  <circle cx="80" cy="60" r="46" fill="#3a2c21" />
+  <path d="M35 75 Q80 15 125 75" fill="#1f1a1a" />
+  <ellipse cx="80" cy="80" rx="38" ry="44" fill="#f1c7a7" />
+  <path d="M40 85 Q40 40 80 40 Q120 40 120 85" fill="#19130f" />
+  <path d="M42 87 Q55 55 80 60 Q105 55 118 87" fill="#332923" />
+  <circle cx="58" cy="86" r="6" fill="#1c1b1f" />
+  <circle cx="102" cy="86" r="6" fill="#1c1b1f" />
+  <circle cx="58" cy="84.5" r="2" fill="#fff" opacity="0.8" />
+  <circle cx="102" cy="84.5" r="2" fill="#fff" opacity="0.8" />
+  <path d="M50 102 Q80 120 110 102" stroke="#151114" stroke-width="6" stroke-linecap="round" fill="none" />
+  <path d="M46 98 Q80 146 114 98" fill="#2b211b" />
+  <path d="M44 100 Q80 140 116 100" stroke="#c3c6cf" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.5" />
+  <rect x="38" y="118" width="84" height="32" rx="10" fill="url(#marty-shirt)" />
+  <path d="M38 126 H122" stroke="#f0d8c2" stroke-width="6" opacity="0.35" />
+  <path d="M60 118 V150" stroke="#f0d8c2" stroke-width="5" opacity="0.35" />
+  <path d="M100 118 V150" stroke="#f0d8c2" stroke-width="5" opacity="0.35" />
+  <rect x="30" y="120" width="100" height="36" rx="12" fill="url(#marty-flannel)" opacity="0.4" />
+  <circle cx="30" cy="120" r="8" fill="#214e23" opacity="0.5" />
+  <circle cx="130" cy="120" r="9" fill="#214e23" opacity="0.5" />
+</svg>

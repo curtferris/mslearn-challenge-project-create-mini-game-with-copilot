@@ -1,0 +1,76 @@
+@using Game.Shared.Models
+
+<div class="janken-overlay" role="status" aria-live="assertive">
+    <div class="janken-circle">
+        @if (!ShowReveal)
+        {
+            <span class="janken-title">Janken!</span>
+            <div class="janken-hands">
+                <div class="janken-hand beat-1">✊</div>
+                <div class="janken-hand beat-2">✊</div>
+                <div class="janken-hand beat-3">✊</div>
+            </div>
+            <p class="janken-caption">Tap • Tap • Reveal</p>
+        }
+        else if (Result != null)
+        {
+            <span class="janken-title">Reveal!</span>
+            <p class="janken-caption">@WinnerLabel</p>
+            <div class="janken-reveal">
+                <div class="reveal-row">
+                    <span class="label">You</span>
+                    <strong class="move-glyph" title="@Result.PlayerMove">@GetMoveGlyph(Result.PlayerMove)</strong>
+                </div>
+                <div class="reveal-row">
+                    <span class="label">Syndicate</span>
+                    <strong class="move-glyph" title="@Result.OpponentMove">@GetMoveGlyph(Result.OpponentMove)</strong>
+                </div>
+                <div class="reveal-row">
+                    <span class="label">Coins</span>
+                    <strong class="@CoinDeltaClass">@CoinDeltaLabel</strong>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p class="janken-caption">Resolving...</p>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public bool ShowReveal { get; set; }
+
+    [Parameter]
+    public RoundResult? Result { get; set; }
+
+    private string WinnerLabel => Result switch
+    {
+        { Winner: RoundWinner.Player } => "You win the clash!",
+        { Winner: RoundWinner.Opponent } => "Opponent prevails!",
+        { Winner: RoundWinner.Tie } => "Drawn out stare-down!",
+        _ => "Calculating outcome..."
+    };
+
+    private string CoinDeltaLabel => Result is null
+        ? string.Empty
+        : Result.CoinDelta >= 0
+            ? $"+{Result.CoinDelta} coins"
+            : $"{Result.CoinDelta} coins";
+
+    private string CoinDeltaClass => Result is null
+        ? string.Empty
+        : Result.CoinDelta >= 0
+            ? "positive"
+            : "negative";
+
+    private static string GetMoveGlyph(MoveType move) => move switch
+    {
+        MoveType.Rock => "✊",
+        MoveType.Paper => "✋",
+        MoveType.Scissors => "✌",
+        _ => "❓"
+    };
+}
+

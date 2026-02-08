@@ -11,4 +11,6 @@ public sealed class OpponentProfile
     public required string Difficulty { get; init; }
 
     public string? Description { get; init; }
+
+    public string? PortraitUrl { get; init; }
 }

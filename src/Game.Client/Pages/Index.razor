@@ -1,16 +1,27 @@
 @page "/"
 
-<PageTitle>Alex Kidd Clash</PageTitle>
+<PageTitle>Alex the Kidd Clash</PageTitle>
 
 <div class="arena-shell">
+    <div class="background-motif motif-left"></div>
+    <div class="background-motif motif-right"></div>
+
+    @if (showJankenOverlay)
+    {
+        <JankenCountdown ShowReveal="@isRevealPhase"
+                          Result="@overlayRoundResult" />
+    }
+
     <section class="hero-panel panel">
-        <div>
-            <p class="eyebrow">Alex Kidd Training Grounds</p>
+        <div class="hero-copy">
+            <p class="eyebrow">Alex the Kidd Training Grounds</p>
             <h1>Face the Janken Syndicate</h1>
             <p class="panel-subtitle">
                 Pick a rival, stake your coins, reveal your move. The API keeps the authoritative state; you focus on the mind games.
             </p>
+            <RetroBadge />
         </div>
+        <MiracleBackdrop />
         <div class="hero-metrics">
             <div class="hero-pill">
                 <span class="label">Coins</span>
@@ -30,6 +41,8 @@
             </div>
         </div>
     </section>
+
+    <LorePanel />
 
     <TauntMarquee Message="@tauntMessage" Tone="@tauntTone" />
 

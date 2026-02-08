@@ -32,6 +32,11 @@ public partial class Index : ComponentBase
     private string? errorMessage;
     private string? tauntMessage;
     private string tauntTone = "neutral";
+    private bool showJankenOverlay;
+    private bool isRevealPhase;
+    private RoundResult? overlayRoundResult;
+    private static readonly TimeSpan CountdownDuration = TimeSpan.FromMilliseconds(1350);
+    private static readonly TimeSpan RevealDuration = TimeSpan.FromSeconds(4);
 
     protected override async Task OnInitializedAsync()
     {
@@ -123,9 +128,12 @@ public partial class Index : ComponentBase
 
         isBusy = true;
         errorMessage = null;
+        RoundResult? resolvedRound = null;
 
         try
         {
+            await ShowCountdownAsync();
+
             var response = await ApiClient.PlayRoundAsync(new PlayRequest
             {
                 OpponentId = selectedOpponentId!,
@@ -135,6 +143,7 @@ public partial class Index : ComponentBase
 
             if (response != null)
             {
+                resolvedRound = response.Round;
                 lastRound = response.Round;
                 await RefreshStatsAsync();
                 ClampBet();
@@ -148,6 +157,15 @@ public partial class Index : ComponentBase
         }
         finally
         {
+            if (resolvedRound != null)
+            {
+                await ShowRevealAsync(resolvedRound);
+            }
+            else
+            {
+                await HideOverlayAsync();
+            }
+
             isBusy = false;
         }
     }
@@ -301,6 +319,32 @@ public partial class Index : ComponentBase
         {
             Logger.LogWarning(ex, "Failed to persist session cache");
         }
+    }
+
+    private async Task ShowCountdownAsync()
+    {
+        showJankenOverlay = true;
+        isRevealPhase = false;
+        overlayRoundResult = null;
+        await InvokeAsync(StateHasChanged);
+        await Task.Delay(CountdownDuration);
+    }
+
+    private async Task ShowRevealAsync(RoundResult round)
+    {
+        overlayRoundResult = round;
+        isRevealPhase = true;
+        await InvokeAsync(StateHasChanged);
+        await Task.Delay(RevealDuration);
+        await HideOverlayAsync();
+    }
+
+    private async Task HideOverlayAsync()
+    {
+        showJankenOverlay = false;
+        isRevealPhase = false;
+        overlayRoundResult = null;
+        await InvokeAsync(StateHasChanged);
     }
 
     private static string FormatStreak(int streak)

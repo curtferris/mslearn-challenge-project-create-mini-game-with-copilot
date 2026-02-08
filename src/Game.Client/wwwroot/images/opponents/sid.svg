@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Sneaky Sid portrait">
+  <defs>
+    <linearGradient id="sid-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#010308" />
+      <stop offset="100%" stop-color="#11162a" />
+    </linearGradient>
+    <linearGradient id="sid-hood" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5a00a0" />
+      <stop offset="100%" stop-color="#210033" />
+    </linearGradient>
+    <linearGradient id="sid-mask" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7f5dff" />
+      <stop offset="100%" stop-color="#00e0ff" />
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="30" fill="url(#sid-bg)" />
+  <circle cx="80" cy="70" r="50" fill="#070814" opacity="0.8" />
+  <path d="M20 128 Q80 150 140 128 L150 160 H10 Z" fill="#02030b" />
+  <ellipse cx="80" cy="82" rx="34" ry="40" fill="#f6c9ac" />
+  <path d="M32 96 Q80 10 128 96" fill="url(#sid-hood)" />
+  <path d="M40 86 Q80 120 120 86" fill="#0a0513" />
+  <rect x="44" y="78" width="72" height="20" rx="10" fill="#05060c" stroke="url(#sid-mask)" stroke-width="4" />
+  <circle cx="60" cy="88" r="6" fill="#00e0ff" />
+  <circle cx="100" cy="88" r="6" fill="#00e0ff" />
+  <circle cx="60" cy="86.5" r="2" fill="#fff" />
+  <circle cx="100" cy="86.5" r="2" fill="#fff" />
+  <path d="M58 106 Q80 120 102 106" stroke="#341742" stroke-width="6" stroke-linecap="round" fill="none" />
+  <rect x="36" y="118" width="88" height="34" rx="14" fill="#14061d" />
+  <path d="M36 134 H124" stroke="#7f5dff" stroke-width="3" stroke-dasharray="8 6" opacity="0.6" />
+  <path d="M55 118 V152" stroke="#00e0ff" stroke-width="4" opacity="0.5" />
+  <path d="M105 118 V152" stroke="#00e0ff" stroke-width="4" opacity="0.5" />
+  <path d="M40 60 L80 38 L120 60" stroke="#7f5dff" stroke-width="3" stroke-linecap="round" opacity="0.4" />
+</svg>

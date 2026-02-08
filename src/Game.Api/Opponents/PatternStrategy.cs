@@ -21,7 +21,8 @@ public sealed class PatternStrategy : IOpponentStrategy
         Name = "Rhythm Rex",
         BehaviorType = "Pattern",
         Difficulty = "Medium",
-        Description = "Repeats a four-move riff — crack the rhythm to win."
+        Description = "Repeats a four-move riff — crack the rhythm to win.",
+        PortraitUrl = "/images/opponents/rex.svg"
     };
 
     public MoveType GetNextMove(PlayRequest request, PlayerState playerState)

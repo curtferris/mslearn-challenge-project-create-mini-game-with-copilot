@@ -18,7 +18,8 @@ public sealed class MartyStrategy : IOpponentStrategy
         Name = "Marty the Maverick",
         BehaviorType = "Random",
         Difficulty = "Easy",
-        Description = "Pure RNG — picks whichever move the universe whispers."
+        Description = "Pure RNG — picks whichever move the universe whispers.",
+        PortraitUrl = "/images/opponents/marty.svg"
     };
 
     public MoveType GetNextMove(PlayRequest request, PlayerState playerState)

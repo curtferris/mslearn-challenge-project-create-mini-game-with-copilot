@@ -58,12 +58,19 @@ Modern take on Alex Kidd’s Janken battles, focused on personality-driven oppon
 > Update: Added the gameplay hub (`Pages/Index.razor`) wired to `GameApiClient`, plus a bespoke retro-inspired theme and a local-storage backed session cache so the UI components share a cohesive layout and survive refreshes.
 
 ### Phase 4 – Polish, QA, and Enhancements
-- [x] Layer retro-inspired animations/audio/CRT shaders and contextual taunts driven by streak data.
-- [ ] Implement optional mechanics (min/max bet toggles, streak bonuses, unlockable opponents/themes) guarded behind feature flags or config.
-- [ ] Expand automated test coverage (API integration tests, Blazor component tests) and document run commands in README.
-- [ ] Prepare release notes or Solution-branch summary so reviewers can compare against the empty baseline.
+ - [x] Fold in more Alex Kidd-inspired art/graphics from Miracle World (custom recreations for this learning task) so the experience feels anchored in that universe.
+	- [x] Add a mini “Janken countdown” animation (tap rock three times before revealing the move) so rounds mimic the original reveal cadence. The reveal now displays the round outcome for a full four seconds so players can digest the moves and winner before the overlay closes.
+ - [x] Add images for all of the opponents so that we can visualise then. 
+- [x] Inject a short background story that elevates Marty into an evil overlord the player must overthrow, setting narrative stakes for beating every opponent.
 
 > Update: Added a CRT scanline overlay, glitchy sweeps, and a streak-aware taunt marquee fed by live player stats to kick off Phase 4 polish.
+> Update: Added the gameplay hub (`Pages/Index.razor`) wired to `GameApiClient`, plus a bespoke retro-inspired theme, local-storage backed session cache, a lore panel with Marty’s overlord storyline, and pruned the Blazor template scaffold so only the Alex Kidd experience remains.
+> Update: Implemented the Miracle World-style Janken countdown overlay that taps thrice, then flashes the round result (moves, winner, and coin delta) before returning to the arena.
+> Update: Extended the reveal phase to linger for four seconds so the player can read both moves, the winner, and the coin delta before the overlay fades out.
+> Update: Swapped the textual move labels in the reveal with rock/paper/scissors glyphs so the overlay instantly communicates what each side picked.
+> Update: Added illustrated SVG portraits for Marty, Lucky Lena, Rhythm Rex, and Sneaky Sid plus UI support so the opponent picker cards showcase each challenger visually.
+> Update: Refined those portraits into full cartoon villains (including a Marty rendition based on the provided photo reference) to better match the Miracle World vibe.
+> Update: Dropped a new MiracleBackdrop component into the hero panel with layered suns, mountains, palace silhouettes, palm islands, and animated waves so the UI immediately evokes Miracle World.
 
 ## Reference Briefs
 
